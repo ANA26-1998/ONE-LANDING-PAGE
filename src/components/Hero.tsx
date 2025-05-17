@@ -55,7 +55,7 @@ const Hero: React.FC = () => {
                     <span className="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
                     <span className="text-sm text-green-600 font-medium">AI-Powered</span>
                   </div>
-                  <h3 className="text-lg font-semibold mb-2">Education Made Simple</h3>
+                  <h2 className="text-lg font-semibold mb-2">Education Made Simple</h2>
                   <p className="text-gray-600">Transforming education through innovative technology.</p>
                 </div>
               </div>
