@@ -42,6 +42,8 @@ const Header: React.FC = () => {
         <button 
           className="md:hidden text-gray-700 hover:text-primary-600 transition-colors"
           onClick={() => setIsOpen(!isOpen)}
+          name='menu'
+          aria-label="Toggle Menu"
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>

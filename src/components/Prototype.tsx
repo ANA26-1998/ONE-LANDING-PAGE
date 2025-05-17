@@ -71,8 +71,8 @@ const Prototype: React.FC = () => {
                 <div className="md:col-span-2 bg-gray-50 rounded-lg p-6">
                   <div className="space-y-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
-                      <select className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+                      <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+                      <select id='subject' className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
                         <option>Science</option>
                         <option>Mathematics</option>
                         <option>English</option>
@@ -81,8 +81,8 @@ const Prototype: React.FC = () => {
                       </select>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Grade Level</label>
-                      <select className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+                      <label htmlFor="grade" className="block text-sm font-medium text-gray-700 mb-1">Grade Level</label>
+                      <select id="grade" className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
                         <option>Elementary (K-5)</option>
                         <option>Middle School (6-8)</option>
                         <option>High School (9-12)</option>
