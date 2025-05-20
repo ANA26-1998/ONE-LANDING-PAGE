@@ -7,54 +7,30 @@ const SignUp: React.FC = () => {
   const [name, setName] = useState('');
   const [role, setRole] = useState('');
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false); // Keep loading for UI feedback
-  const [error, setError] = useState<string | null>(null);
+
+  // Function to encode form data for Netlify
+  const encode = (data: { [key: string]: string }) => {
+    return Object.keys(data)
+      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&");
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault(); // Prevent default form submission initially
-    setError(null); // Clear previous errors
-
+    e.preventDefault();
     if (step === 1) {
-      // Validate email format before proceeding to step 2
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        setError("Please enter a valid email address.");
-        return;
-      }
       setStep(2);
     } else {
-      // This is step 2: Collect name and role, then submit the form to Netlify
-      if (!name || !role) {
-        setError("Please fill in all required fields (Full Name and Your Role).");
-        return;
-      }
-
-      setLoading(true);
+      // Netlify form submission
       try {
-        const form = e.currentTarget as HTMLFormElement;
-        const formData = new FormData(form);
-        
-        // Use the current page's path for the fetch URL.
-        // Netlify will intercept POST requests to this path if the form is configured correctly.
-        const targetUrl = window.location.pathname;
-
-        // Simulate form submission to Netlify
-        // Netlify will process this POST request if the form has data-netlify="true"
-        // and a hidden input named "form-name".
-        await fetch(targetUrl, {
+        await fetch("/", {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams(formData as any).toString(),
+          body: encode({ "form-name": "early-access", email, name, role })
         });
-
-        setSubmitted(true); // Indicate successful submission
-        setEmail(''); // Clear form fields
-        setName('');
-        setRole('');
-      } catch (err) {
-        console.error("Error submitting form to Netlify:", err);
-        setError("Failed to submit your information. Please try again.");
-      } finally {
-        setLoading(false);
+        setSubmitted(true);
+      } catch (error) {
+        console.error("Netlify form submission failed:", error);
+        // Handle error, e.g., show an error message to the user
       }
     }
   };
@@ -63,7 +39,7 @@ const SignUp: React.FC = () => {
     "Early access to our AI lesson planning tool",
     "Priority support and onboarding",
     "Influence product development with your feedback",
-    "Exclusive updates and news" // Updated benefit list
+    "Exclusive community access" 
   ];
 
   return (
@@ -72,10 +48,10 @@ const SignUp: React.FC = () => {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Get Early Access</h2> {/* Updated heading */}
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">Join Our Early Access Program</h2> {/* Modified heading */}
               <p className="text-blue-100 mb-8 text-lg">
                 Be among the first to experience the future of education.
-                Join our community of forward-thinking educators and get notified when our MVP is ready.
+                Sign up to join our community of forward-thinking educators. {/* Modified text */}
               </p>
 
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 mb-8">
@@ -89,40 +65,23 @@ const SignUp: React.FC = () => {
                   ))}
                 </ul>
               </div>
+
             </div>
 
             <div className="bg-white text-gray-900 rounded-xl shadow-2xl overflow-hidden">
               {!submitted ? (
-                <form
-                  onSubmit={handleSubmit}
-                  className="p-8"
-                  name="early-access-signup"
-                  data-netlify="true"
-                  netlify-honeypot="bot-field"
-                  action="/"
-                >
-                  <input type="hidden" name="form-name" value="early-access-signup" />
-                  <p className="hidden">
-                    <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
-                  </p>
-
+                // Add data-netlify="true" and name="early-access" to the form
+                <form onSubmit={handleSubmit} className="p-8" data-netlify="true" name="early-access">
                   <div className="mb-6">
                     <h3 className="text-2xl font-bold mb-2">
-                      {step === 1 ? "Join the Waitlist" : "Tell Us More"}
+                      {step === 1 ? "Join the Waitlist" : "Complete Your Profile"}
                     </h3>
                     <p className="text-gray-600">
                       {step === 1
                         ? "Sign up to get early access to our revolutionary platform."
-                        : "Just a few more details to help us understand our early adopters."}
+                        : "Just a few more details to secure your spot."}
                     </p>
                   </div>
-
-                  {error && (
-                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-                      <strong className="font-bold">Error!</strong>
-                      <span className="block sm:inline"> {error}</span>
-                    </div>
-                  )}
 
                   {step === 1 ? (
                     <div className="space-y-4">
@@ -133,7 +92,7 @@ const SignUp: React.FC = () => {
                         <input
                           id="email"
                           type="email"
-                          name="email"
+                          name="email" // Added name attribute for Netlify
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           required
@@ -145,13 +104,8 @@ const SignUp: React.FC = () => {
                       <button
                         type="submit"
                         className="w-full py-3 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-all flex items-center justify-center gap-2"
-                        disabled={loading}
                       >
-                        {loading ? 'Processing...' : (
-                          <>
-                            Continue <ArrowRight size={16} />
-                          </>
-                        )}
+                        Continue <ArrowRight size={16} />
                       </button>
 
                       <p className="text-xs text-gray-500 text-center mt-4">
@@ -167,7 +121,7 @@ const SignUp: React.FC = () => {
                         <input
                           id="name"
                           type="text"
-                          name="name"
+                          name="name" // Added name attribute for Netlify
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           required
@@ -182,7 +136,7 @@ const SignUp: React.FC = () => {
                         </label>
                         <select
                           id="role"
-                          name="role"
+                          name="role" // Added name attribute for Netlify
                           value={role}
                           onChange={(e) => setRole(e.target.value)}
                           required
@@ -203,13 +157,8 @@ const SignUp: React.FC = () => {
                       <button
                         type="submit"
                         className="w-full py-3 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-all flex items-center justify-center gap-2"
-                        disabled={loading}
                       >
-                        {loading ? 'Submitting...' : (
-                          <>
-                            Submit <ArrowRight size={16} /> {/* Updated button text */}
-                          </>
-                        )}
+                        Sign Up <ArrowRight size={16} /> {/* Modified button text */}
                       </button>
 
                       <div className="text-center">
@@ -229,16 +178,17 @@ const SignUp: React.FC = () => {
                   <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                     <CheckCircle size={32} className="text-green-600" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-2">Thank You!</h3>
+                  <h3 className="text-2xl font-bold mb-2">Thank You for Signing Up!</h3> {/* Modified heading */}
                   <p className="text-gray-600 mb-6">
-                    Your information has been received! We'll be in touch with updates. {/* Updated message */}
+                    Your spot in our early access program has been reserved! Check your email for confirmation and next steps.
                   </p>
                   <div className="bg-blue-50 p-4 rounded-lg text-left mb-6">
                     <p className="font-medium text-gray-900 mb-1">What's Next?</p>
                     <ol className="text-sm text-gray-600 space-y-1 list-decimal list-inside">
-                      <li>We'll send a confirmation email shortly.</li>
-                      <li>You'll receive updates on our MVP's progress.</li>
-                      <li>Get ready for early access!</li>
+                      <li>Check your email for a welcome message</li>
+                      <li>Complete your profile setup</li>
+                      <li>Join our exclusive early access community</li>
+                      <li>Get ready for the full experience in the coming weeks</li>
                     </ol>
                   </div>
                   <a
