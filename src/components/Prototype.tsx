@@ -329,8 +329,10 @@ const Prototype: React.FC = () => {
             and effective lessons for their students.
           </p>
           <a 
-            href="#prototype" 
+            href="https://studio--edone-rd5d3.us-central1.hosted.app/lesson-planner/dashboard" 
             className="inline-block px-8 py-3 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-all transform hover:scale-105 shadow-lg"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Try Prototype Now
           </a>
