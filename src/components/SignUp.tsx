@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { CheckCircle, ArrowRight } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 
 const SignUp: React.FC = () => {
   const [step, setStep] = useState(1);
@@ -7,30 +8,31 @@ const SignUp: React.FC = () => {
   const [name, setName] = useState('');
   const [role, setRole] = useState('');
   const [submitted, setSubmitted] = useState(false);
-
-  // Function to encode form data for Netlify
-  const encode = (data: { [key: string]: string }) => {
-    return Object.keys(data)
-      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-      .join("&");
-  };
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (step === 1) {
       setStep(2);
     } else {
-      // Netlify form submission
       try {
-        await fetch("/", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: encode({ "form-name": "early-access", email, name, role })
-        });
+        setError('');
+        
+        // Save to Supabase
+        const { error: supabaseError } = await supabase
+          .from('early_access_submissions')
+          .insert([
+            { email, name, role }
+          ]);
+
+        if (supabaseError) {
+          throw supabaseError;
+        }
+
         setSubmitted(true);
-      } catch (error) {
-        console.error("Netlify form submission failed:", error);
-        // Handle error, e.g., show an error message to the user
+      } catch (err) {
+        console.error('Error submitting form:', err);
+        setError('There was an error submitting your form. Please try again.');
       }
     }
   };
@@ -48,10 +50,10 @@ const SignUp: React.FC = () => {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Join Our Early Access Program</h2> {/* Modified heading */}
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">Join Our Early Access Program</h2>
               <p className="text-blue-100 mb-8 text-lg">
                 Be among the first to experience the future of education.
-                Sign up to join our community of forward-thinking educators. {/* Modified text */}
+                Sign up to join our community of forward-thinking educators.
               </p>
 
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 mb-8">
@@ -65,13 +67,11 @@ const SignUp: React.FC = () => {
                   ))}
                 </ul>
               </div>
-
             </div>
 
             <div className="bg-white text-gray-900 rounded-xl shadow-2xl overflow-hidden">
               {!submitted ? (
-                // Add data-netlify="true" and name="early-access" to the form
-                <form onSubmit={handleSubmit} className="p-8" data-netlify="true" name="early-access">
+                <form onSubmit={handleSubmit} className="p-8">
                   <div className="mb-6">
                     <h3 className="text-2xl font-bold mb-2">
                       {step === 1 ? "Join the Waitlist" : "Complete Your Profile"}
@@ -83,6 +83,12 @@ const SignUp: React.FC = () => {
                     </p>
                   </div>
 
+                  {error && (
+                    <div className="mb-4 p-3 bg-red-50 text-red-700 rounded-md">
+                      {error}
+                    </div>
+                  )}
+
                   {step === 1 ? (
                     <div className="space-y-4">
                       <div>
@@ -92,7 +98,6 @@ const SignUp: React.FC = () => {
                         <input
                           id="email"
                           type="email"
-                          name="email" // Added name attribute for Netlify
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           required
@@ -121,7 +126,6 @@ const SignUp: React.FC = () => {
                         <input
                           id="name"
                           type="text"
-                          name="name" // Added name attribute for Netlify
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           required
@@ -136,7 +140,6 @@ const SignUp: React.FC = () => {
                         </label>
                         <select
                           id="role"
-                          name="role" // Added name attribute for Netlify
                           value={role}
                           onChange={(e) => setRole(e.target.value)}
                           required
@@ -152,13 +155,11 @@ const SignUp: React.FC = () => {
                         </select>
                       </div>
 
-                      {/* Removed the payment section entirely */}
-
                       <button
                         type="submit"
                         className="w-full py-3 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-all flex items-center justify-center gap-2"
                       >
-                        Sign Up <ArrowRight size={16} /> {/* Modified button text */}
+                        Sign Up <ArrowRight size={16} />
                       </button>
 
                       <div className="text-center">
@@ -178,7 +179,7 @@ const SignUp: React.FC = () => {
                   <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                     <CheckCircle size={32} className="text-green-600" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-2">Thank You for Signing Up!</h3> {/* Modified heading */}
+                  <h3 className="text-2xl font-bold mb-2">Thank You for Signing Up!</h3>
                   <p className="text-gray-600 mb-6">
                     Your spot in our early access program has been reserved! Check your email for confirmation and next steps.
                   </p>
