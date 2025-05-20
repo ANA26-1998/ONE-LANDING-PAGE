@@ -7,14 +7,55 @@ const SignUp: React.FC = () => {
   const [name, setName] = useState('');
   const [role, setRole] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false); // Keep loading for UI feedback
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault(); // Prevent default form submission initially
+    setError(null); // Clear previous errors
+
     if (step === 1) {
+      // Validate email format before proceeding to step 2
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        setError("Please enter a valid email address.");
+        return;
+      }
       setStep(2);
     } else {
-      setSubmitted(true);
-      // Here you would normally handle the API call to save the user information
+      // This is step 2: Collect name and role, then submit the form to Netlify
+      if (!name || !role) {
+        setError("Please fill in all required fields (Full Name and Your Role).");
+        return;
+      }
+
+      setLoading(true);
+      try {
+        const form = e.currentTarget as HTMLFormElement;
+        const formData = new FormData(form);
+        
+        // Use the current page's path for the fetch URL.
+        // Netlify will intercept POST requests to this path if the form is configured correctly.
+        const targetUrl = window.location.pathname;
+
+        // Simulate form submission to Netlify
+        // Netlify will process this POST request if the form has data-netlify="true"
+        // and a hidden input named "form-name".
+        await fetch(targetUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams(formData as any).toString(),
+        });
+
+        setSubmitted(true); // Indicate successful submission
+        setEmail(''); // Clear form fields
+        setName('');
+        setRole('');
+      } catch (err) {
+        console.error("Error submitting form to Netlify:", err);
+        setError("Failed to submit your information. Please try again.");
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -22,8 +63,7 @@ const SignUp: React.FC = () => {
     "Early access to our AI lesson planning tool",
     "Priority support and onboarding",
     "Influence product development with your feedback",
-    "25% discount on the full version at launch",
-    "Free access to future updates for 12 months"
+    "Exclusive updates and news" // Updated benefit list
   ];
 
   return (
@@ -32,12 +72,12 @@ const SignUp: React.FC = () => {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Get Early Access with 10% Deposit</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">Get Early Access</h2> {/* Updated heading */}
               <p className="text-blue-100 mb-8 text-lg">
-                Be among the first to experience the future of education. 
-                Secure your spot with a 10% deposit and join our community of forward-thinking educators.
+                Be among the first to experience the future of education.
+                Join our community of forward-thinking educators and get notified when our MVP is ready.
               </p>
-              
+
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 mb-8">
                 <h3 className="text-xl font-semibold mb-4">Early Access Benefits</h3>
                 <ul className="space-y-3">
@@ -48,24 +88,42 @@ const SignUp: React.FC = () => {
                     </li>
                   ))}
                 </ul>
-              </div>    
-          
+              </div>
             </div>
-            
+
             <div className="bg-white text-gray-900 rounded-xl shadow-2xl overflow-hidden">
               {!submitted ? (
-                <form onSubmit={handleSubmit} className="p-8">
+                <form
+                  onSubmit={handleSubmit}
+                  className="p-8"
+                  name="early-access-signup"
+                  data-netlify="true"
+                  netlify-honeypot="bot-field"
+                  action="/"
+                >
+                  <input type="hidden" name="form-name" value="early-access-signup" />
+                  <p className="hidden">
+                    <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+                  </p>
+
                   <div className="mb-6">
                     <h3 className="text-2xl font-bold mb-2">
-                      {step === 1 ? "Join the Waitlist" : "Complete Your Profile"}
+                      {step === 1 ? "Join the Waitlist" : "Tell Us More"}
                     </h3>
                     <p className="text-gray-600">
-                      {step === 1 
-                        ? "Sign up to get early access to our revolutionary platform." 
-                        : "Just a few more details to secure your spot."}
+                      {step === 1
+                        ? "Sign up to get early access to our revolutionary platform."
+                        : "Just a few more details to help us understand our early adopters."}
                     </p>
                   </div>
-                  
+
+                  {error && (
+                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                      <strong className="font-bold">Error!</strong>
+                      <span className="block sm:inline"> {error}</span>
+                    </div>
+                  )}
+
                   {step === 1 ? (
                     <div className="space-y-4">
                       <div>
@@ -75,6 +133,7 @@ const SignUp: React.FC = () => {
                         <input
                           id="email"
                           type="email"
+                          name="email"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           required
@@ -82,14 +141,19 @@ const SignUp: React.FC = () => {
                           placeholder="your@email.com"
                         />
                       </div>
-                      
+
                       <button
                         type="submit"
                         className="w-full py-3 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-all flex items-center justify-center gap-2"
+                        disabled={loading}
                       >
-                        Continue <ArrowRight size={16} />
+                        {loading ? 'Processing...' : (
+                          <>
+                            Continue <ArrowRight size={16} />
+                          </>
+                        )}
                       </button>
-                      
+
                       <p className="text-xs text-gray-500 text-center mt-4">
                         By signing up, you agree to our Terms of Service and Privacy Policy.
                       </p>
@@ -103,6 +167,7 @@ const SignUp: React.FC = () => {
                         <input
                           id="name"
                           type="text"
+                          name="name"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           required
@@ -110,13 +175,14 @@ const SignUp: React.FC = () => {
                           placeholder="John Smith"
                         />
                       </div>
-                      
+
                       <div>
                         <label htmlFor="role" className="block text-sm font-medium text-gray-700 mb-1">
                           Your Role in Education
                         </label>
                         <select
                           id="role"
+                          name="role"
                           value={role}
                           onChange={(e) => setRole(e.target.value)}
                           required
@@ -131,27 +197,21 @@ const SignUp: React.FC = () => {
                           <option value="other">Other</option>
                         </select>
                       </div>
-                      
-                      <div className="bg-blue-50 p-4 rounded-lg">
-                        <p className="font-medium text-gray-900 mb-2">Secure Your Spot</p>
-                        <p className="text-gray-600 text-sm mb-4">
-                          A 10% deposit ($49) is required to secure your early access. 
-                          This amount will be credited toward your subscription when we launch.
-                        </p>
-                        <div className="flex items-center">
-                          <span className="text-2xl font-bold text-blue-600">$49</span>
-                          <span className="text-gray-500 ml-2 line-through">$199</span>
-                          <span className="ml-auto bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">75% OFF</span>
-                        </div>
-                      </div>
-                      
+
+                      {/* Removed the payment section entirely */}
+
                       <button
                         type="submit"
                         className="w-full py-3 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-all flex items-center justify-center gap-2"
+                        disabled={loading}
                       >
-                        Secure My Spot <ArrowRight size={16} />
+                        {loading ? 'Submitting...' : (
+                          <>
+                            Submit <ArrowRight size={16} /> {/* Updated button text */}
+                          </>
+                        )}
                       </button>
-                      
+
                       <div className="text-center">
                         <button
                           type="button"
@@ -171,18 +231,17 @@ const SignUp: React.FC = () => {
                   </div>
                   <h3 className="text-2xl font-bold mb-2">Thank You!</h3>
                   <p className="text-gray-600 mb-6">
-                    Your spot has been reserved! Check your email for confirmation and next steps.
+                    Your information has been received! We'll be in touch with updates. {/* Updated message */}
                   </p>
                   <div className="bg-blue-50 p-4 rounded-lg text-left mb-6">
                     <p className="font-medium text-gray-900 mb-1">What's Next?</p>
                     <ol className="text-sm text-gray-600 space-y-1 list-decimal list-inside">
-                      <li>Check your email for a welcome message</li>
-                      <li>Complete your profile setup</li>
-                      <li>Join our exclusive early access community</li>
-                      <li>Get ready for the full experience in the coming weeks</li>
+                      <li>We'll send a confirmation email shortly.</li>
+                      <li>You'll receive updates on our MVP's progress.</li>
+                      <li>Get ready for early access!</li>
                     </ol>
                   </div>
-                  <a 
+                  <a
                     href="#"
                     className="inline-block px-6 py-2 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-all"
                   >
