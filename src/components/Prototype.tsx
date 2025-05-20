@@ -1,9 +1,21 @@
 import React, { useState } from 'react';
 import { Play, ChevronRight, Zap, CheckCircle } from 'lucide-react';
+import OptInModal from './OptInModal';
 
 const Prototype: React.FC = () => {
   const [activeTab, setActiveTab] = useState(1);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [showOptIn, setShowOptIn] = useState(false);
+
+  const handlePrototypeClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowOptIn(true);
+  };
+
+  const handleOptInSuccess = () => {
+    setShowOptIn(false);
+    window.location.href = 'https://studio--edone-rd5d3.us-central1.hosted.app/lesson-planner/dashboard';
+  };
 
   return (
     <section id="prototype" className="py-20 bg-gray-50">
@@ -328,16 +340,20 @@ const Prototype: React.FC = () => {
             Join teachers who are saving hours each week while creating more engaging 
             and effective lessons for their students.
           </p>
-          <a 
-            href="https://studio--edone-rd5d3.us-central1.hosted.app/lesson-planner/dashboard" 
+          <button 
+            onClick={handlePrototypeClick}
             className="inline-block px-8 py-3 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-all transform hover:scale-105 shadow-lg"
-            target="_blank"
-            rel="noopener noreferrer"
           >
             Try Prototype Now
-          </a>
+          </button>
         </div>
       </div>
+
+      <OptInModal 
+        isOpen={showOptIn}
+        onClose={() => setShowOptIn(false)}
+        onSuccess={handleOptInSuccess}
+      />
     </section>
   );
 };
