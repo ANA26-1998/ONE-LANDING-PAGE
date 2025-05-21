@@ -4,7 +4,6 @@ import OptInModal from './OptInModal';
 
 const Prototype: React.FC = () => {
   const [activeTab, setActiveTab] = useState(1);
-  const [isPlaying, setIsPlaying] = useState(false);
   const [showOptIn, setShowOptIn] = useState(false);
 
   const handlePrototypeClick = (e: React.MouseEvent) => {
@@ -153,18 +152,17 @@ const Prototype: React.FC = () => {
                 </div>
                 <div className="md:col-span-2 bg-gray-50 rounded-lg p-6 flex flex-col items-center justify-center">
                   <div className="relative w-full max-w-md mb-8">
-                    <div className={`absolute inset-0 bg-blue-600 ${isPlaying ? 'animate-spread' : ''} rounded-full opacity-10`}></div>
+                    <div className="absolute inset-0 bg-blue-600 animate-spread rounded-full opacity-10"></div>
                     <div className="relative z-10 flex items-center justify-center">
-                      <button 
-                        onClick={() => setIsPlaying(!isPlaying)} 
-                        className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-colors"
+                      <div 
+                        className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white"
                       >
-                        {isPlaying ? <Zap size={24} /> : <Play size={24} />}
-                      </button>
+                        <Zap size={24} />
+                      </div>
                     </div>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
-                    <div className="bg-blue-600 h-2 rounded-full animate-load"></div>
+                    <div className="bg-blue-600 h-2 rounded-full w-full transition-all duration-1000"></div>
                   </div>
                   <p className="text-gray-600 text-sm">Generating lesson plan... 100% complete</p>
                 </div>
