@@ -290,10 +290,10 @@ const Prototype: React.FC = () => {
                       Back
                     </button>
                     <a 
-                      href="#signup" 
+                      href="#prototype" 
                       className="px-5 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-all"
                     >
-                      Sign Up Now
+                      Try the prototype now
                     </a>
                   </div>
                 </div>
@@ -335,11 +335,6 @@ const Prototype: React.FC = () => {
         </div>
         
         <div className="text-center">
-          <h3 className="text-2xl font-semibold mb-4">Ready to transform your teaching?</h3>
-          <p className="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
-            Join teachers who are saving hours each week while creating more engaging 
-            and effective lessons for their students.
-          </p>
           <button 
             onClick={handlePrototypeClick}
             className="inline-block px-8 py-3 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-all transform hover:scale-105 shadow-lg"
