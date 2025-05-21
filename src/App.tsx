@@ -21,7 +21,6 @@ function App() {
       <Mission />
       <Features />
       <Prototype />
-      <Testimonials />
       <SignUp />
       <Footer />
     </div>
