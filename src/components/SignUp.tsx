@@ -77,7 +77,7 @@ const SignUp: React.FC = () => {
                     </h3>
                     <p className="text-gray-600">
                       {step === 1
-                        ? "Sign up to get early access to our revolutionary platform."
+                        ? "Sign up to get early access to our MVP."
                         : "Just a few more details to secure your spot."}
                     </p>
                   </div>
