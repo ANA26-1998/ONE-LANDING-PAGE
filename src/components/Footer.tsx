@@ -128,7 +128,7 @@ const Footer: React.FC = () => {
         </div>
         
         <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p>© 2025 ONE Education. All rights reserved.</p>
+          <p> 2025 ONE Education.</p>
         </div>
       </div>
     </footer>
