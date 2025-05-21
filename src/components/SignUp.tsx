@@ -216,17 +216,9 @@ const SignUp: React.FC = () => {
                   </div>
                   <h3 className="text-2xl font-bold mb-2">Thank You for Signing Up!</h3>
                   <p className="text-gray-600 mb-6">
-                    Your spot in our early access program has been reserved! Check your email for confirmation and next steps.
+                    Your spot in our early access program has been reserved! we will reach out to you in the coming months!
                   </p>
-                  <div className="bg-blue-50 p-4 rounded-lg text-left mb-6">
-                    <p className="font-medium text-gray-900 mb-1">What's Next?</p>
-                    <ol className="text-sm text-gray-600 space-y-1 list-decimal list-inside">
-                      <li>Check your email for a welcome message</li>
-                      <li>Complete your profile setup</li>
-                      <li>Join our exclusive early access community</li>
-                      <li>Get ready for the full experience in the coming weeks</li>
-                    </ol>
-                  </div>
+                  
                   <a
                     href="#"
                     className="inline-block px-6 py-2 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-all"
