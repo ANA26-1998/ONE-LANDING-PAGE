@@ -77,7 +77,7 @@ const Features: React.FC = () => {
                 <img 
                   src="/b t.PNG" 
                   alt="teacher supporting student"
-                  className="w-full h-80 object-cover object-center"
+                  className="w-full object-cover object-center"
                 />
                 <div className="p-6 pb-10 bg-white">
                   <h3 className="text-lg font-semibold mb-2">Intelligent Lesson Creator</h3>
