@@ -65,12 +65,7 @@ const Mission: React.FC = () => {
                 Where every student has access to the tools and resources they need to succeed. 
                 Where technology bridges the gap between potential and achievement.
               </p>
-              <div className="flex flex-wrap gap-4 text-sm">
-                <span className="px-3 py-1 bg-white/20 rounded-full text-white">Innovation</span>
-                <span className="px-3 py-1 bg-white/20 rounded-full text-white">Collaboration</span>
-                <span className="px-3 py-1 bg-white/20 rounded-full text-white">Excellence</span>
-              </div>
-            </div>
+              
             <div className="bg-gradient-to-r from-primary-700 to-primary-900 p-8 md:p-12 flex items-center justify-center">
               <div className="relative">
                 <div className="text-7xl md:text-9xl font-bold text-white/10">ONE</div>
