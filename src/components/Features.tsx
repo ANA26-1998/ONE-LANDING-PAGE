@@ -71,7 +71,7 @@ const Features: React.FC = () => {
           </div>
           
           <div className="order-1 lg:order-2">
-            <div className="relative">
+            <div className="relative mb-12">
               {/* Main Image */}
               <div className="bg-white rounded-xl shadow-xl overflow-hidden">
                 <img 
