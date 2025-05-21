@@ -16,26 +16,14 @@ const Hero: React.FC = () => {
           <div className="order-2 md:order-1 animate-fade-in-up">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900 mb-6">
               <span className="text-green-600">ONE</span>, 
-              <br />
-              <span 
-                className="inline-block" 
-                style={{
-                  // Create the orange underline using a linear gradient as a background image
-                  backgroundImage: 'linear-gradient(to right, rgba(251, 146, 60, 0.5), rgba(251, 146, 60, 0.5))', // orange-400 with 50% opacity
-                  backgroundRepeat: 'no-repeat', // Don't repeat the background
-                  backgroundSize: '100% 0.125rem', // Full width of the line, 2px height
-                  backgroundPosition: '0 100%', // Position at the bottom of the text
-                  paddingBottom: '0.25rem', // Add space between text and the underline
-                  // box-decoration-break: clone is crucial here: it makes the background and padding apply to each line fragment
-                  WebkitBoxDecorationBreak: 'clone', // For Safari compatibility
-                  boxDecorationBreak: 'clone',
-                  // Apply a subtle border-radius to the overall text box for a rounded feel,
-                  // though per-line rounding is very complex with this method.
-                  borderRadius: '0.125rem', 
-                }}
-              >
+              <br />  
+              <div className="relative inline-block">
                 Unlocking the world's potential!
-              </span>
+                <span 
+                  className="absolute bottom-0 left-0 w-full h-2 bg-orange-400 opacity-50 rounded-lg"
+                  style={{ bottom: '0.25rem' }}
+                />
+              </div>
             </h1>
             <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
               Unlocking the world's potential by providing access to quality education for all. 
