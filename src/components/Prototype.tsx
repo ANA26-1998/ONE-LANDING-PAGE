@@ -289,12 +289,6 @@ const Prototype: React.FC = () => {
                     >
                       Back
                     </button>
-                    <a 
-                      href="#prototype" 
-                      className="px-5 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-all"
-                    >
-                      Try the prototype now
-                    </a>
                   </div>
                 </div>
                 <div className="md:col-span-2 bg-gray-50 rounded-lg p-6">
