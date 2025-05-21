@@ -75,7 +75,7 @@ const Features: React.FC = () => {
               {/* Main Image */}
               <div className="bg-white rounded-xl shadow-xl overflow-hidden">
                 <img 
-                  src="/one sis.jpg" 
+                  src="/b t.PNG" 
                   alt="teacher supporting student"
                   className="w-full h-80 object-cover object-center"
                 />
