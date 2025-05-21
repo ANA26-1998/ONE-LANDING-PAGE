@@ -75,15 +75,14 @@ const Features: React.FC = () => {
               {/* Main Image */}
               <div className="bg-white rounded-xl shadow-xl overflow-hidden">
                 <img 
-                  src="https://images.pexels.com/photos/5905445/pexels-photo-5905445.jpeg" 
-                  alt="Teacher with students in classroom" 
+                  src="/one sis.jpg" 
+                  alt="teacher supporting student"
                   className="w-full h-80 object-cover object-center"
                 />
                 <div className="p-6 bg-white">
                   <h3 className="text-lg font-semibold mb-2">Intelligent Lesson Creator</h3>
                   <p className="text-gray-600 mb-4">Our AI understands your teaching style and creates personalized lesson plans that match your unique approach.</p>
                   <div className="flex items-center gap-2">
-                    <span className="text-primary-600 font-medium">See how it works</span>
                     <div className="w-6 h-1 bg-primary-600 rounded-full"></div>
                   </div>
                 </div>
@@ -95,7 +94,7 @@ const Features: React.FC = () => {
                   <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                   <p className="text-green-700 text-sm font-medium">Time Saved</p>
                 </div>
-                <p className="text-gray-700 text-sm">Teachers using ONE save an average of 6 hours per week on lesson planning.</p>
+                <p className="text-gray-700 text-sm">Teachers using ONE will save an average of 6 hours per week on lesson planning.</p>
               </div>
             </div>
           </div>
