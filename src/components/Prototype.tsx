@@ -14,7 +14,8 @@ const Prototype: React.FC = () => {
 
   const handleOptInSuccess = () => {
     setShowOptIn(false);
-    window.location.href = 'https://studio--edone-rd5d3.us-central1.hosted.app/lesson-planner/dashboard';
+    const prototypeLink = 'https://studio--edone-rd5d3.us-central1.hosted.app/lesson-planner/dashboard';
+    window.open(prototypeLink, '_blank', 'noopener,noreferrer');
   };
 
   return (
