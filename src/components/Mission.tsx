@@ -66,6 +66,7 @@ const Mission: React.FC = () => {
                 Where technology bridges the gap between potential and achievement.
               </p>
               
+            </div>
             <div className="bg-gradient-to-r from-primary-700 to-primary-900 p-8 md:p-12 flex items-center justify-center">
               <div className="relative">
                 <div className="text-7xl md:text-9xl font-bold text-white/10">ONE</div>
