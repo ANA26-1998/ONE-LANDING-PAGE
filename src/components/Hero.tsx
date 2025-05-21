@@ -18,7 +18,7 @@ const Hero: React.FC = () => {
               <span className="text-green-600">ONE</span>, 
               <br />  
               <span>
-                Unlocking the world's potential!
+                Unlocking the world's <span className="text-orange-600">potential!</span>
               </span>
             </h1>
             <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
