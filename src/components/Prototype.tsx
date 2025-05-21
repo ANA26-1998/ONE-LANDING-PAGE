@@ -23,8 +23,8 @@ const Prototype: React.FC = () => {
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">Experience the Prototype</h2>
           <p className="text-lg text-gray-700 leading-relaxed">
-            See how our AI-assisted lesson planning tool works in action. 
-            Interact with our prototype to understand how ONE will revolutionize the way teachers create engaging lessons.
+            Below is the outline of how our AI-assisted lesson planning tool works in action. 
+            Interact with our prototype afterwards to understand how ONE will revolutionize the way teachers create engaging lessons.
           </p>
         </div>
         
