@@ -56,7 +56,7 @@ const Mission: React.FC = () => {
           />
         </div>
         
-        <div className="bg-orange-600 rounded-2xl overflow-hidden shadow-xl">
+        <div className="bg-primary-600 rounded-2xl overflow-hidden shadow-xl">
           <div className="grid md:grid-cols-2">
             <div className="p-8 md:p-12">
               <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">Our Vision</h3>
@@ -67,7 +67,7 @@ const Mission: React.FC = () => {
               </p>
               
             </div>
-            <div className="bg-gradient-to-r from-green-700 to-green-900 p-8 md:p-12 flex items-center justify-center">
+            <div className="bg-gradient-to-r from-primary-700 to-primary-900 p-8 md:p-12 flex items-center justify-center">
               <div className="relative w-full h-full flex items-center justify-center">
                 <div className="absolute text-7xl md:text-9xl font-bold text-white/10">ONE</div>
                 <div className="relative z-10 p-4">
