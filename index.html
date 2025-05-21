@@ -13,9 +13,9 @@
   <body>
     <div id="root"></div>
 
-    <form name="early-access" netlify hidden>
-      <input type="email" name="email" />
+    <form name="early-access" data-netlify="true" netlify-honeypot="bot-field" hidden>
       <input type="text" name="name" />
+      <input type="email" name="email" />
       <select name="role"></select>
       <input type="hidden" name="form-name" value="early-access" />
     </form>

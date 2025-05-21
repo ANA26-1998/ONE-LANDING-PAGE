@@ -9,6 +9,13 @@ const SignUp: React.FC = () => {
   const [role, setRole] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const encode = (data: Record<string, string>) => {
+    return Object.keys(data)
+      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&");
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,8 +23,23 @@ const SignUp: React.FC = () => {
       setStep(2);
     } else {
       try {
+        setIsSubmitting(true);
         setError('');
-        
+
+        // Submit to Netlify forms
+        const formData = {
+          'form-name': 'early-access',
+          email,
+          name,
+          role
+        };
+
+        await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: encode(formData)
+        });
+
         // Save to Supabase
         const { error: supabaseError } = await supabase
           .from('early_access_submissions')
@@ -26,6 +48,11 @@ const SignUp: React.FC = () => {
           ]);
 
         if (supabaseError) {
+          if (supabaseError.code === '23505') { // Unique violation
+            // If email already exists, consider it a success
+            setSubmitted(true);
+            return;
+          }
           throw supabaseError;
         }
 
@@ -33,6 +60,8 @@ const SignUp: React.FC = () => {
       } catch (err) {
         console.error('Error submitting form:', err);
         setError('There was an error submitting your form. Please try again.');
+      } finally {
+        setIsSubmitting(false);
       }
     }
   };
@@ -70,7 +99,9 @@ const SignUp: React.FC = () => {
 
             <div className="bg-white text-gray-900 rounded-xl shadow-2xl overflow-hidden">
               {!submitted ? (
-                <form onSubmit={handleSubmit} className="p-8">
+                <form onSubmit={handleSubmit} className="p-8" data-netlify="true" name="early-access">
+                  <input type="hidden" name="form-name" value="early-access" />
+                  
                   <div className="mb-6">
                     <h3 className="text-2xl font-bold mb-2">
                       {step === 1 ? "Join the Waitlist" : "Complete Your Profile"}
@@ -96,6 +127,7 @@ const SignUp: React.FC = () => {
                         </label>
                         <input
                           id="email"
+                          name="email"
                           type="email"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
@@ -107,6 +139,7 @@ const SignUp: React.FC = () => {
 
                       <button
                         type="submit"
+                        disabled={isSubmitting}
                         className="w-full py-3 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-all flex items-center justify-center gap-2"
                       >
                         Continue <ArrowRight size={16} />
@@ -124,6 +157,7 @@ const SignUp: React.FC = () => {
                         </label>
                         <input
                           id="name"
+                          name="name"
                           type="text"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
@@ -139,6 +173,7 @@ const SignUp: React.FC = () => {
                         </label>
                         <select
                           id="role"
+                          name="role"
                           value={role}
                           onChange={(e) => setRole(e.target.value)}
                           required
@@ -156,9 +191,10 @@ const SignUp: React.FC = () => {
 
                       <button
                         type="submit"
+                        disabled={isSubmitting}
                         className="w-full py-3 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-all flex items-center justify-center gap-2"
                       >
-                        Sign Up <ArrowRight size={16} />
+                        {isSubmitting ? 'Submitting...' : 'Sign Up'} <ArrowRight size={16} />
                       </button>
 
                       <div className="text-center">
