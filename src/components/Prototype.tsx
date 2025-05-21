@@ -85,34 +85,40 @@ const Prototype: React.FC = () => {
                   <div className="space-y-4">
                     <div>
                       <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
-                      <select id='subject' className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+                      <select 
+                        id="subject" 
+                        className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                        value="Science"
+                        disabled
+                      >
                         <option>Science</option>
-                        <option>Mathematics</option>
-                        <option>English</option>
-                        <option>History</option>
-                        <option>Art</option>
                       </select>
                     </div>
                     <div>
                       <label htmlFor="grade" className="block text-sm font-medium text-gray-700 mb-1">Grade Level</label>
-                      <select id="grade" className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+                      <select 
+                        id="grade" 
+                        className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                        value="Elementary (K-5)"
+                        disabled
+                      >
                         <option>Elementary (K-5)</option>
-                        <option>Middle School (6-8)</option>
-                        <option>High School (9-12)</option>
                       </select>
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">Topic</label>
                       <input 
                         type="text" 
-                        placeholder="e.g., Photosynthesis, Fractions, Shakespeare..." 
+                        value="Photosynthesis"
+                        disabled
                         className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
                       />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">Additional Requirements (Optional)</label>
                       <textarea 
-                        placeholder="Any specific activities, resources, or requirements..."
+                        value="Include hands-on activities and visual aids to help students understand the process of photosynthesis."
+                        disabled
                         className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
                         rows={3}
                       ></textarea>
