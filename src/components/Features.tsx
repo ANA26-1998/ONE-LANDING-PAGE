@@ -83,7 +83,7 @@ const Features: React.FC = () => {
                   <h3 className="text-lg font-semibold mb-2">Intelligent Lesson Creator</h3>
                   <p className="text-gray-600 mb-4">Our AI understands your teaching style and creates personalized lesson plans that match your unique approach.</p>
                   <div className="flex items-center gap-2">
-                    <div className="w-6 h-1 bg-primary-600 rounded-full"></div>
+                   
                   </div>
                 </div>
               </div>
