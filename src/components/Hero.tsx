@@ -19,9 +19,10 @@ const Hero: React.FC = () => {
               <br />
               <span className="relative inline-block">
                 Unlocking the world's potential!
-                <span className="absolute bottom-0 left-0 w-full h-2 bg-orange-400 opacity-50 rounded-lg"></span>
-                     style={{ bottom: '0.25rem' }} // Adjusted bottom for better alignment
-                ></span>
+                <span 
+                  className="absolute bottom-0 left-0 w-full h-2 bg-orange-400 opacity-50 rounded-lg"
+                  style={{ bottom: '0.25rem' }}
+                />
               </span>
             </h1>
             <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
