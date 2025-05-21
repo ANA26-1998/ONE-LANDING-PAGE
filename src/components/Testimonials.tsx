@@ -88,8 +88,8 @@ const Testimonials: React.FC = () => {
           
  <h3 className="text-2xl font-semibold mb-4">Ready to transform your teaching?</h3>
           <p className="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
-            Join teachers who are saving hours each week while creating more engaging 
-            and effective lessons for their students.
+            Join us to save hours each week while creating more engaging 
+            and effective lessons for students.
           </p>
         
         </div>
