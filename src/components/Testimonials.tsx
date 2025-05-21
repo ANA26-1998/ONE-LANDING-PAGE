@@ -88,6 +88,12 @@ const Testimonials: React.FC = () => {
           <div className="inline-block bg-primary-50 rounded-full px-6 py-3 text-primary-700">
             Join 100+ educators already using ONE
           </div>
+ <h3 className="text-2xl font-semibold mb-4">Ready to transform your teaching?</h3>
+          <p className="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
+            Join teachers who are saving hours each week while creating more engaging 
+            and effective lessons for their students.
+          </p>
+        
         </div>
       </div>
     </section>
