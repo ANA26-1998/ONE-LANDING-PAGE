@@ -20,6 +20,8 @@ const Hero: React.FC = () => {
               <span className="relative inline-block">
                 Unlocking the world's potential!
                 <span className="absolute bottom-0 left-0 w-full h-2 bg-orange-400 opacity-50 rounded-lg"></span>
+                     style={{ bottom: '0.25rem' }} // Adjusted bottom for better alignment
+                ></span>
               </span>
             </h1>
             <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
@@ -35,7 +37,7 @@ const Hero: React.FC = () => {
               </a>
               <a 
                 href="#mission" 
-                className="px-6 py-3 border border-orange-600 text-orange-600 rounded-md text-center hover:bg-primary-50 transition-all flex items-center justify-center gap-2"
+                className="px-6 py-3 bg-orange-600 text-white rounded-md text-center hover:bg-orange-700 transition-all flex items-center justify-center gap-2"
               >
                 Learn More <ArrowDownCircle size={18} />
               </a>
@@ -66,11 +68,6 @@ const Hero: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
-      
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <ArrowDownCircle size={24} className="text-primary-600" />
       </div>
     </section>
   );
