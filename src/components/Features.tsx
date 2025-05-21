@@ -71,7 +71,7 @@ const Features: React.FC = () => {
           </div>
           
           <div className="order-1 lg:order-2">
-            <div className="relative mb-12">
+            <div className="relative">
               {/* Main Image */}
               <div className="bg-white rounded-xl shadow-xl overflow-hidden">
                 <img 
@@ -89,7 +89,7 @@ const Features: React.FC = () => {
               </div>
               
               {/* Floating element */}
-              <div className="absolute -bottom-6 -right-6 bg-green-100 rounded-lg p-4 shadow-lg max-w-xs">
+              <div className="absolute -bottom-12 -right-6 bg-green-100 rounded-lg p-4 shadow-lg max-w-xs">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                   <p className="text-green-700 text-sm font-medium">Time Saved</p>
