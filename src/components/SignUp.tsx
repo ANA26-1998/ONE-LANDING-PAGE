@@ -50,7 +50,7 @@ const SignUp: React.FC = () => {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Early Access Program</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">Join our Early Access Program</h2>
               <p className="text-blue-100 mb-8 text-lg">
                Sign up to be among the first to experience the future of education and join our community of forward-thinking educators.
               </p>
