@@ -67,11 +67,11 @@ const Mission: React.FC = () => {
               </p>
               
             </div>
-            <div className="bg-gradient-to-r from-primary-700 to-primary-900 p-8 md:p-12 flex items-center justify-center">
-              <div className="relative">
-                <div className="text-7xl md:text-9xl font-bold text-white/10">ONE</div>
-                <div className="absolute inset-0 flex flex-col justify-center">
-                  <p className="text-white text-center text-xl md:text-2xl leading-tight">
+            <div className="bg-gradient-to-r from-green-700 to-green-900 p-8 md:p-12 flex items-center justify-center">
+              <div className="relative w-full h-full flex items-center justify-center">
+                <div className="absolute text-7xl md:text-9xl font-bold text-white/10">ONE</div>
+                <div className="relative z-10 p-4">
+                  <p className="text-white text-center text-xl md:text-2xl leading-tight max-w-md mx-auto">
                     "Education is the most powerful weapon which you can use to change the world."
                   </p>
                   <p className="text-primary-200 text-center mt-3">— Nelson Mandela</p>
