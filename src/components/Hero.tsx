@@ -45,7 +45,7 @@ const Hero: React.FC = () => {
                 onClick={handlePrototypeClick}
                 className="px-6 py-3 bg-green-600 text-white rounded-md text-center hover:bg-green-700 transition-all transform hover:scale-105 shadow-lg"
               >
-                Try the Prototype
+                Try the free prototype now
               </a>
               <a 
                 href="#mission" 
