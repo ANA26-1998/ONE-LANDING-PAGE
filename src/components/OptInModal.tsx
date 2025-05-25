@@ -66,10 +66,10 @@ const OptInModal: React.FC<OptInModalProps> = ({ isOpen, onClose, onSuccess }) =
 
         <div className="p-6">
           <h3 className="text-2xl font-bold text-gray-900 mb-2">
-            Try Our Prototype
+            Try Our free Prototype
           </h3>
           <p className="text-gray-600 mb-6">
-            Enter your email to get instant access to our AI-powered lesson planning prototype. 
+            Enter your email to get instant access to our free AI-powered lesson planning prototype. 
             Be among the first to experience the future of education.
           </p>
 
