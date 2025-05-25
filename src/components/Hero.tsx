@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ArrowDownCircle } from 'lucide-react';
+import OptInModal from './OptInModal';
 
 const Hero: React.FC = () => {
+  const [showOptIn, setShowOptIn] = useState(false);
+
+  const handlePrototypeClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowOptIn(true);
+  };
+
+  const handleOptInSuccess = () => {
+    setShowOptIn(false);
+    const prototypeLink = 'https://studio--edone-rd5d3.us-central1.hosted.app/lesson-planner/dashboard';
+    window.open(prototypeLink, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <section className="relative pt-20 min-h-screen flex items-center">
       {/* Background gradient */}
@@ -27,7 +41,8 @@ const Hero: React.FC = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a 
-                href="#prototype" 
+                href="#"
+                onClick={handlePrototypeClick}
                 className="px-6 py-3 bg-green-600 text-white rounded-md text-center hover:bg-green-700 transition-all transform hover:scale-105 shadow-lg"
               >
                 Try the Prototype
@@ -66,6 +81,12 @@ const Hero: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <OptInModal 
+        isOpen={showOptIn}
+        onClose={() => setShowOptIn(false)}
+        onSuccess={handleOptInSuccess}
+      />
     </section>
   );
 };
