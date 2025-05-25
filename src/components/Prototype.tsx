@@ -338,7 +338,7 @@ const Prototype: React.FC = () => {
             onClick={handlePrototypeClick}
             className="inline-block px-8 py-3 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-all transform hover:scale-105 shadow-lg"
           >
-            Try The Free Prototype Now
+            Try the free prototype now
           </button>
         </div>
       </div>
