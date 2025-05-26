@@ -22,7 +22,7 @@ const Header: React.FC = () => {
     >
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
         <a href="#" className="flex items-center gap-2">
-          <img src="/one logo.png" alt=" ONE Logo" className="h-8" />
+          <img src="/one logoo.png" alt=" ONE Logo" className="h-8" />
            {/*ONE*/}
            <span className="font-bold text-gray-900 text-lg">ONE</span>
         
